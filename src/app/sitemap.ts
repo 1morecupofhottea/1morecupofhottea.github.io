@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
 
   for (const locale of LOCALES) {
-    const prefix = locale === "en" ? "" : "/ja";
+    const prefix = `/${locale}`;
     const projects = getAllProjects(locale).map((p) => ({
       url: `${BASE_URL}${prefix}/projects/${p.slug}`,
       lastModified: new Date(p.publishedAt),
