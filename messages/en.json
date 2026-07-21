@@ -1,0 +1,135 @@
+{
+  "Site": {
+    "title": "Machine Learning Engineer",
+    "tagline": "Speech AI & Khmer Language Technology",
+    "bio": "Machine Learning Engineer at the Non-Bank Financial Authority of Cambodia, building Khmer ASR systems from the ground up — audio data pipelines, Whisper fine-tuning, and a full-stack deployment portal (FastAPI + Vue). CADT graduate 2026 with a thesis on Khmer speech recognition. Currently preparing for my next chapter at a Japanese tech company."
+  },
+  "Nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "blog": "Blog",
+    "contact": "Contact",
+    "resume": "Resume"
+  },
+  "LangSwitch": {
+    "en": "EN",
+    "ja": "日本語"
+  },
+  "Hero": {
+    "greeting": "Hi, I'm {name}",
+    "subtitle": "I build speech recognition systems for Khmer — from audio data pipelines and Whisper fine-tuning to full-stack ASR portals. Low-resource languages deserve great speech AI.",
+    "viewProjects": "View Projects",
+    "downloadResume": "Download Resume",
+    "statYears": "Years experience",
+    "statProjects": "Projects shipped",
+    "statTools": "Tools mastered"
+  },
+  "AboutSection": {
+    "title": "About",
+    "heading": "Building speech AI for underrepresented languages",
+    "bio2": "When I'm not training ASR models or wrangling audio datasets, I write about speech technology and low-resource NLP on this blog.",
+    "statYears": "Years experience",
+    "statProjects": "AI projects shipped",
+    "statTools": "Tools & frameworks"
+  },
+  "SkillsSection": {
+    "title": "Skills",
+    "heading": "Tools & Technologies"
+  },
+  "ProjectsSection": {
+    "title": "Projects",
+    "heading": "Featured Work",
+    "viewAll": "View all →",
+    "viewAllMobile": "View all projects"
+  },
+  "ExperienceSection": {
+    "title": "Experience",
+    "heading": "Career Timeline"
+  },
+  "ContactSection": {
+    "title": "Contact",
+    "heading": "Let's work together",
+    "description": "Open to collaborations on speech AI, low-resource language technology, or interesting ML problems. Whether you're working on ASR, NLP, or something adjacent — feel free to reach out.",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "messagePlaceholder": "Tell me about your project or role...",
+    "nameRequired": "Please enter your name.",
+    "emailRequired": "Please enter your email address.",
+    "emailInvalid": "Please enter a valid email address.",
+    "messageRequired": "Please enter a message.",
+    "sending": "Sending...",
+    "sent": "Sent!",
+    "sendMessage": "Send Message",
+    "error": "Something went wrong — please email me directly.",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter"
+  },
+  "Footer": {
+    "builtWith": "Built with Next.js & Tailwind CSS"
+  },
+  "ProjectCard": {
+    "github": "GitHub",
+    "liveDemo": "Live Demo",
+    "readMore": "Read more →"
+  },
+  "ProjectFilter": {
+    "all": "All"
+  },
+  "ProjectsPage": {
+    "label": "Portfolio",
+    "title": "All Projects",
+    "description": "Khmer speech recognition, audio data pipelines, computer vision — ML projects from research to production."
+  },
+  "ProjectDetail": {
+    "backToProjects": "Back to projects",
+    "viewOnGitHub": "View on GitHub",
+    "liveDemo": "Live Demo",
+    "nextProject": "Next Project"
+  },
+  "BlogPage": {
+    "label": "Writing",
+    "title": "Blog",
+    "description": "Notes on AI engineering, production LLMs, and the messy reality of building ML systems.",
+    "readMore": "Read more →"
+  },
+  "BlogDetail": {
+    "backToBlog": "Back to blog"
+  },
+  "AboutPage": {
+    "label": "About",
+    "focusParagraph": "My focus is speech AI for low-resource languages — specifically Khmer. I work across the full pipeline: data collection and annotation, TTS-based augmentation, model fine-tuning, and building the infrastructure to deploy and evaluate models in production. I believe great speech technology should exist for every language, not just the well-resourced ones.",
+    "prepParagraph": "Currently preparing for my next chapter at make.co.ltd, a Japanese IT company in Osaka, where I'll be studying Japanese IT practices. Outside of work I write about speech technology and low-resource NLP on this blog.",
+    "downloadResume": "Download Resume",
+    "getInTouch": "Get in touch",
+    "connect": "Connect",
+    "technologies": "Technologies",
+    "experience": "Experience",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter"
+  },
+  "ContactPage": {
+    "description": "Get in touch — open to full-time roles, consulting, and interesting projects."
+  },
+  "SectionLabel": {
+    "of": "/"
+  },
+  "SkillGacha": {
+    "openFab": "Open skill gacha",
+    "title": "Skill Gacha",
+    "close": "Close",
+    "pull": "PULL",
+    "spinning": "Spinning...",
+    "resultLabel": "Your skill is..."
+  },
+  "Casino": {
+    "play": "PLAY",
+    "loading": "Loading...",
+    "introSkip": "Click to skip",
+    "mute": "Mute sound",
+    "unmute": "Unmute sound"
+  }
+}

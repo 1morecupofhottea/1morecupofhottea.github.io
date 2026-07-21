@@ -1,0 +1,30 @@
+[
+  {
+    "date": "2025 – Present",
+    "role": "Japanese IT Pathway Student",
+    "company": "AUPP / NEXT MAKE (Osaka)",
+    "description": "Studying Japanese IT pathway at the American University of Phnom Penh, hosted by NEXT MAKE co.ltd based in Osaka, Japan.",
+    "tags": ["Japanese", "IT", "Software Engineering"]
+  },
+  {
+    "date": "Jan – Jul 2026",
+    "role": "Machine Learning Engineer Intern",
+    "company": "Fintech Center, FSA (Cambodia)",
+    "description": "Built Khmer Automatic Speech Recognition systems end-to-end: data preparation, training, evaluation, and analysis. Developed a full-stack ASR deployment portal (ASR Portal) for audio corpus collection and model deployment. This work also served as the bachelor's thesis at CADT.",
+    "tags": ["Whisper", "FastAPI", "Vue.js", "PyTorch", "Khmer TTS", "ASR"]
+  },
+  {
+    "date": "May – Jul 2025",
+    "role": "Research Intern",
+    "company": "IDRI Lab, CADT",
+    "description": "Researched Khmer–English code-switching speech recognition. Explored wav2vec2 and Whisper for low-resource Khmer speech, contributing to multilingual ASR datasets and fine-tuning pipelines.",
+    "tags": ["Wav2Vec2", "Whisper", "Code-Switching", "HuggingFace", "Research"]
+  },
+  {
+    "date": "2022 – 2026",
+    "role": "B.Sc. Computer Science — Data Science",
+    "company": "Cambodia Academy of Digital Technology (CADT)",
+    "description": "Graduated 2026. Thesis: fine-tuning OpenAI Whisper for Khmer ASR — data preparation, augmentation with Khmer TTS, and evaluation on low-resource Khmer speech.",
+    "tags": ["Whisper", "ASR", "Data Science", "Research"]
+  }
+]

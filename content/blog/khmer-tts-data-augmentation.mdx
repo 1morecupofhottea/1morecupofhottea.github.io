@@ -1,0 +1,70 @@
+---
+title: "Using Khmer TTS to Bootstrap ASR Training Data"
+slug: khmer-tts-data-augmentation
+publishedAt: "2025-11-20"
+tags: ["TTS", "ASR", "Khmer", "Data Augmentation", "Speech"]
+excerpt: "When real transcribed speech is scarce, synthetic audio from TTS can fill the gap — but the details matter. A practical guide to TTS-based ASR data augmentation."
+readingTime: "6 min read"
+---
+
+Collecting transcribed speech data is slow and expensive. For a language like Khmer, where the speech tech community is small and annotators are scarce, you have to get creative.
+
+One approach I've used extensively: generate synthetic training samples using a Khmer Text-to-Speech engine, then mix them with real recordings to train ASR models.
+
+Here's how to do it — and where it can go wrong.
+
+## Why TTS augmentation works at all
+
+A well-trained TTS system produces speech that shares acoustic characteristics with real speech: the same phoneme inventory, the same prosodic patterns (roughly), the same recording conditions (roughly). An ASR model trained partly on TTS audio learns acoustic–phoneme mappings that transfer to real speech.
+
+The key phrase is "well-trained TTS system." A bad TTS engine produces artifacts that teach your ASR model the wrong things.
+
+## The workflow
+
+**Step 1: Build a text corpus**
+
+You need Khmer text — lots of it. Sources I've used:
+- Khmer Wikipedia dump
+- News article corpora
+- Crawled web text (carefully cleaned)
+
+Filter for variety: sentence length, vocabulary, domain (news, conversational, technical). Don't just take the first N sentences from a sorted file.
+
+**Step 2: Generate audio**
+
+Send text through the TTS engine in batches. For each sentence, I generate 2–3 variants with slightly different speed and pitch parameters to add diversity.
+
+Watch for:
+- Sentences that are too long (TTS quality degrades on long inputs)
+- Numbers, dates, abbreviations — these often get mispronounced
+- Foreign words (English loanwords in Khmer text): TTS may handle these inconsistently
+
+**Step 3: Quality filter**
+
+Not all TTS output is usable. I filter by:
+- Duration (too short = likely truncated, too long = likely repeated)
+- Spectral flatness (flags artifacts)
+- A small held-out set of sentences I listen to manually to calibrate the filters
+
+**Step 4: Mix with real data**
+
+I treat TTS samples as lower-weight training examples. In practice, sampling 1 TTS sample for every 2–3 real samples works well. Too much TTS and the model overadapts to the synthetic distribution.
+
+## What TTS augmentation is good for
+
+- **Vocabulary coverage**: real corpora have long tails of rare words. TTS can cover vocabulary that doesn't appear in your limited real-speech corpus.
+- **Phoneme coverage**: if certain phoneme combinations are rare in your real data, generate sentences specifically containing them.
+- **Consistent transcriptions**: TTS-generated audio has perfect ground-truth transcriptions — no annotation errors.
+
+## What TTS augmentation won't fix
+
+- Naturalistic prosody and conversational speech patterns
+- Code-switching (most Khmer TTS handles Khmer only)
+- Speaker diversity — TTS is typically 1–5 voices
+- Background noise robustness — TTS output is clean
+
+For these, you still need real data collection.
+
+## Bottom line
+
+TTS augmentation is a force multiplier for low-resource ASR, not a replacement for real data. Used carefully, it can cut your real-data requirement substantially while improving vocabulary coverage and reducing WER on unseen terms.

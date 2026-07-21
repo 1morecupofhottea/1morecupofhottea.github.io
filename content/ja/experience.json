@@ -1,0 +1,30 @@
+[
+  {
+    "date": "2025 – 現在",
+    "role": "日本ITパスウェイ学生",
+    "company": "AUPP / NEXT MAKE（大阪）",
+    "description": "アメリカン大学プノンペン（AUPP）でNEXT MAKE（大阪）主催の日本ITパスウェイプログラムに在籍。",
+    "tags": ["Japanese", "IT", "Software Engineering"]
+  },
+  {
+    "date": "2026年1月 – 7月",
+    "role": "機械学習エンジニアインターン",
+    "company": "Fintech Center, FSA（カンボジア）",
+    "description": "クメール語自動音声認識（ASR）システムをエンドツーエンドで構築：データ準備、トレーニング、評価、分析。音声コーパス収集とモデルデプロイメントのためのフルスタックASRポータルを開発。この成果はCADTの学士論文としても使用された。",
+    "tags": ["Whisper", "FastAPI", "Vue.js", "PyTorch", "Khmer TTS", "ASR"]
+  },
+  {
+    "date": "2025年5月 – 7月",
+    "role": "研究インターン",
+    "company": "IDRI Lab, CADT",
+    "description": "クメール語・英語のコードスイッチング音声認識を研究。wav2vec2とWhisperを用いた低リソース・クメール語音声認識の探求、マルチリンガルASRデータセットとファインチューニングパイプラインへの貢献。",
+    "tags": ["Wav2Vec2", "Whisper", "Code-Switching", "HuggingFace", "Research"]
+  },
+  {
+    "date": "2022 – 2026",
+    "role": "B.Sc. コンピュータサイエンス — データサイエンス専攻",
+    "company": "カンボジアデジタル技術アカデミー（CADT）",
+    "description": "2026年卒業。卒業論文：OpenAI Whisperのクメール語ASR向けファインチューニング — データ準備、クメール語TTSによるデータ拡張、低リソース・クメール語音声の評価。",
+    "tags": ["Whisper", "ASR", "Data Science", "Research"]
+  }
+]

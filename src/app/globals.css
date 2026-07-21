@@ -1,26 +1,321 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
+  --font-jp: "Noto Sans JP Variable", var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-indigo: #4f46e5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #ffffff;
+  --foreground: #0b0c0e;
+  --card: #fafafa;
+  --card-foreground: #0b0c0e;
+  --popover: #ffffff;
+  --popover-foreground: #0b0c0e;
+  --primary: #0b0c0e;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #0b0c0e;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #eef2ff;
+  --accent-foreground: #4f46e5;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #4f46e5;
+  --radius: 0.5rem;
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: #f5f5f5;
+  --sidebar-foreground: #0b0c0e;
+  --sidebar-primary: #0b0c0e;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eef2ff;
+  --sidebar-accent-foreground: #4f46e5;
+  --sidebar-border: #e5e5e5;
+  --sidebar-ring: #4f46e5;
+
+  /* Gold accent palette for the skill gacha widget */
+  --color-gold: #d4af37;
+  --color-gold-light: #f0d68a;
+  --color-gold-dark: #b8942e;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Hide the native cursor on mouse/trackpad devices; CustomCursor replaces it.
+   Touch devices are excluded via the (pointer: fine) query and keep the
+   native cursor since CustomCursor never mounts there either. */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* --- Japanese design standards (和風デザイン標準) --- */
+
+/* 3.1 Font: use Noto Sans JP for Japanese text, Inter as fallback */
+html[lang="ja"] body {
+  font-family: var(--font-jp);
+}
+
+/* 3.2 Typography — Japanese readability (line-height / letter-spacing) */
+html[lang="ja"] p,
+html[lang="ja"] li {
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+}
+
+html[lang="ja"] h1,
+html[lang="ja"] h2,
+html[lang="ja"] h3 {
+  letter-spacing: 0.03em;
+  font-weight: 700;
+}
+
+/* 3.3 Vertical rhythm & whitespace (余白) — more generous spacing in JP mode */
+html[lang="ja"] section,
+html[lang="ja"] .section-wrapper {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+html[lang="ja"] .grid {
+  gap: 2rem;
+}
+
+/* 3.4 Heading treatment — subtle decorative marker before section labels */
+html[lang="ja"] .section-label::before {
+  content: "── ";
+  color: var(--color-indigo);
+  opacity: 0.5;
+  margin-right: 0.25em;
+}
+
+/* 3.5 Refined color palette — slightly muted accent for JP mode */
+html[lang="ja"] {
+  --color-indigo: #5b5fe0;
+}
+
+/* 3.6 Refined borders & separators — hairline, dashed for JP mode */
+html[lang="ja"] .border-b {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+/* 3.8 Micro-interactions — smoother, slightly longer transitions in JP mode */
+html[lang="ja"] a,
+html[lang="ja"] button {
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Premium animation utilities --- */
+
+/* Animated gradient for alternating sections */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.section-gradient {
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-indigo) 3%, transparent) 25%,
+    transparent 50%,
+    color-mix(in srgb, var(--accent) 2%, transparent) 75%,
+    transparent 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient-shift 20s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-gradient {
+    animation: none;
+  }
+}
+
+/* Card shine overlay */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.08) 45%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: shine-sweep 6s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.card-shine:hover::after {
+  opacity: 1;
+}
+
+@keyframes shine-sweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-shine::after {
+    animation: none;
+  }
+}
+
+/* --- Casino: loading screen bounce --- */
+@keyframes spin-bounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-8px) rotate(180deg);
+    opacity: 0.7;
+  }
+}
+
+/* --- Casino: PLAY button ambient pulse --- */
+@keyframes play-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(79, 70, 229, 0);
+  }
+}
+
+.play-btn-pulse {
+  animation: play-pulse 2.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .play-btn-pulse {
+    animation: none;
+  }
+}
+
+/* --- Casino: Resume button gold ambient pulse + shine sweep --- */
+@keyframes resume-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-gold) 35%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-gold) 0%, transparent);
+  }
+}
+
+.resume-btn-premium {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 55%, transparent);
+  animation: resume-pulse 2.5s ease-in-out infinite;
+}
+
+.resume-btn-premium::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    color-mix(in srgb, var(--color-gold-light) 55%, transparent) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: shine-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resume-btn-premium,
+  .resume-btn-premium::after {
+    animation: none;
+  }
 }

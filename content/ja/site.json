@@ -1,0 +1,13 @@
+{
+  "name": "Leangsreng SREAN",
+  "title": "機械学習エンジニア",
+  "tagline": "音声AI & クメール言語技術",
+  "bio": "カンボジアデジタル技術アカデミー（CADT）でコンピュータサイエンス（データサイエンス専攻）を卒業。現在、アメリカン大学プノンペン（AUPP）でNEXT MAKE（大阪）主催の日本ITパスウェイプログラムに在籍。IDRI Lab（CADT）でクメール語・英語コードスイッチングASRの研究インターン、その後FSAのFintech Centerで機械学習エンジニアインターンとしてエンドツーエンドのクメール語ASRシステムとフルスタックASRデプロイメントポータルを構築。学士論文はWhisperのクメール語音声認識向けファインチューニングに焦点を当てる。",
+  "avatar": "/images/profile.jpg",
+  "socials": {
+    "github": "https://github.com/1morecupofhottea",
+    "linkedin": "https://www.linkedin.com/in/srengg/"
+  },
+  "email": "leangsreng.srean@gmail.com",
+  "resumeUrl": "/resume.pdf"
+}

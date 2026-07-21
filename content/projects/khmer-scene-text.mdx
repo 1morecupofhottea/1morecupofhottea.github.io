@@ -1,0 +1,44 @@
+---
+title: "Khmer Scene Text Detection"
+slug: khmer-scene-text
+publishedAt: "2025-06-01"
+category: "Computer Vision"
+tags: ["YOLO", "PyTorch", "Computer Vision", "Label Studio", "Python"]
+image: "/images/projects/khmer-scene-text.png"
+featured: true
+description: "A YOLO-based detection model fine-tuned on a custom-labeled dataset of Khmer text in natural scene images."
+---
+
+## Problem
+
+Scene text detection in natural images is a well-studied problem for Latin and CJK scripts — but Khmer script has received little attention. Standard pre-trained detectors struggle with Khmer's complex subscript system and character density.
+
+## Dataset
+
+There were no suitable open-source Khmer scene text datasets available, so one was built from scratch:
+
+- Images collected from Cambodian street signage, storefronts, and billboards
+- Annotated using Label Studio with bounding box labels at the word level
+- Data augmentation: rotation, perspective distortion, brightness/contrast variation to simulate varied real-world conditions
+
+## Model
+
+YOLO was selected for its speed and strong performance on dense detection tasks:
+
+- Base model: YOLOv8 pretrained on COCO
+- Fine-tuned on the custom Khmer dataset
+- Training tracked with Weights & Biases
+- Inference pipeline: image → detection → crop → optional OCR stage
+
+## Results
+
+- Strong mAP on the held-out test set despite limited training data
+- The model handles multi-line signage and overlapping text regions
+- Demonstrated generalization across different font styles encountered in Cambodian urban environments
+
+## Stack
+
+- **Detection**: YOLOv8 (Ultralytics)
+- **Annotation**: Label Studio
+- **Training**: PyTorch, CUDA
+- **Experiment tracking**: Weights & Biases

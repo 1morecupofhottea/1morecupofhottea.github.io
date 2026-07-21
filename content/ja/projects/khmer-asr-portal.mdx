@@ -1,0 +1,50 @@
+---
+title: "クメール語ASRポータル"
+slug: khmer-asr-portal
+publishedAt: "2026-06-01"
+category: "ASR"
+tags: ["Whisper", "FastAPI", "Vue.js", "PyTorch", "Khmer TTS", "Docker"]
+image: "/images/projects/khmer-asr-portal.png"
+featured: true
+description: "クメール語音声認識のためのエンドツーエンド音声コーパス管理・モデルデプロイメントプラットフォーム。カンボジアFSA Fintech Center向けに構築。"
+---
+
+## 概要
+
+クメール語は低リソース言語であり、公開されている音声データは限られている。本プロジェクトは、音声コーパス収集ポータルとモデルデプロイメントポータルの両面からこの問題に取り組む。
+
+## 音声コーパスポータル
+
+コーパスポータルでは、社内チームがクメール語音声録音をアップロード、アノテーション、品質確認できる。主な機能：
+
+- **一括音声アップロード** — 波形プレビューと再生機能付き
+- **文字起こしワークフロー** — タスク割り当てとレビュー段階
+- **クメール語TTS統合** — 実際の録音を補完する合成音声
+- **データエクスポート** — HuggingFace DatasetsおよびKaldi互換形式
+
+バックエンドはFastAPI + PostgreSQL、フロントエンドはVue.jsで構築。
+
+## モデルデプロイメントポータル
+
+MLエンジニアが学習済みWhisperモデルバージョンを管理するための独立したインターフェース：
+
+- 新しいモデルチェックポイントのアップロードと登録
+- アップロードされた音声ファイルに対するバッチ推論ジョブの実行
+- 文字起こし出力と正解ラベル・WERメトリクスの表示
+- 同じテストセットでの複数モデルバージョンのA/B比較
+
+## 学習パイプライン
+
+収集したコーパスとTTS拡張データを使用して、Whisper small/mediumチェックポイントをファインチューニング：
+
+- 音声前処理：16kHzへのリサンプリング、ノイズ拡張、速度摂動
+- クメール語Unicodeスクリプトに適応したトークナイザー
+- HuggingFace `Seq2SeqTrainer`を使用した学習、MLflowへのログ記録
+- 保持されたネイティブスピーカーテストセットでの評価
+
+## 使用技術
+
+- **バックエンド**：Python、FastAPI、SQLAlchemy、PostgreSQL
+- **フロントエンド**：Vue.js、Vite
+- **ML**：PyTorch、HuggingFace Transformers、Whisper
+- **インフラ**：Docker、Linux

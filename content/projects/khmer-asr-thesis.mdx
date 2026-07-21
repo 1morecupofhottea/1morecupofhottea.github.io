@@ -1,0 +1,45 @@
+---
+title: "Khmer ASR with Whisper Fine-tuning"
+slug: khmer-asr-thesis
+publishedAt: "2026-07-01"
+category: "ASR"
+tags: ["Whisper", "PyTorch", "HuggingFace", "Data Augmentation", "NLP"]
+image: "/images/projects/khmer-asr-thesis.png"
+featured: true
+description: "Bachelor's thesis: fine-tuning OpenAI Whisper for Khmer speech recognition, including a full data preparation pipeline and TTS-based augmentation strategy."
+---
+
+## Problem
+
+Khmer ASR research lags behind high-resource languages because of limited transcribed speech data. Most existing systems are proprietary, and open-source alternatives have high word error rates on naturalistic Khmer speech.
+
+## Approach
+
+The thesis focuses on two contributions: (1) a reproducible data preparation pipeline for Khmer speech, and (2) fine-tuning Whisper on the resulting dataset.
+
+### Data Preparation
+
+Collecting sufficient transcribed Khmer audio is the hardest part. The pipeline combines:
+
+- **Real recordings**: sourced from publicly available Khmer broadcast media and read-speech datasets
+- **TTS augmentation**: a Khmer TTS engine generates additional training samples from Khmer text corpora, expanding coverage of rare vocabulary and phoneme combinations
+- **Preprocessing**: all audio resampled to 16kHz mono, silence trimming, normalization
+- **Cleaning**: forced alignment used to flag and remove low-quality transcription pairs
+
+### Fine-tuning Whisper
+
+Whisper's multilingual checkpoints (small, medium) were fine-tuned using HuggingFace's `Seq2SeqTrainer`:
+
+- Khmer-specific tokenizer extension to cover Unicode Khmer script edge cases
+- Gradient checkpointing for memory efficiency
+- Evaluation with WER on a native-speaker held-out test set
+
+## Results
+
+- Significant WER reduction compared to the zero-shot Whisper baseline on Khmer
+- TTS augmentation improved performance on unseen vocabulary
+- The data pipeline and model checkpoints are documented for future research reuse
+
+## Key Findings
+
+Low-resource ASR benefits more from data diversity than data volume alone. A small set of high-quality, phonetically diverse recordings outperforms a larger noisy corpus in downstream WER.

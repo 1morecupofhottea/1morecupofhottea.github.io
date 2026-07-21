@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Speech & ASR",
+    "skills": ["Whisper", "Wav2Vec2", "Kaldi", "PyAnnote", "Khmer TTS", "ONNX"]
+  },
+  {
+    "title": "Deep Learning & ML",
+    "skills": ["PyTorch", "HuggingFace", "YOLO", "scikit-learn", "NumPy", "Pandas"]
+  },
+  {
+    "title": "AI Engineering",
+    "skills": ["FastAPI", "Docker", "Python", "REST APIs", "PostgreSQL", "Linux"]
+  },
+  {
+    "title": "Tools & Frontend",
+    "skills": ["Vue.js", "Next.js", "Git", "MLflow", "Label Studio", "Jupyter"]
+  }
+]

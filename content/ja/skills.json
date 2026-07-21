@@ -1,0 +1,18 @@
+[
+  {
+    "title": "音声・ASR",
+    "skills": ["Whisper", "Wav2Vec2", "Kaldi", "PyAnnote", "Khmer TTS", "ONNX"]
+  },
+  {
+    "title": "深層学習・ML",
+    "skills": ["PyTorch", "HuggingFace", "YOLO", "scikit-learn", "NumPy", "Pandas"]
+  },
+  {
+    "title": "AIエンジニアリング",
+    "skills": ["FastAPI", "Docker", "Python", "REST APIs", "PostgreSQL", "Linux"]
+  },
+  {
+    "title": "ツール・フロントエンド",
+    "skills": ["Vue.js", "Next.js", "Git", "MLflow", "Label Studio", "Jupyter"]
+  }
+]

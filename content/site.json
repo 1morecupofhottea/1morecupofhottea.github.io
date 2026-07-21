@@ -1,0 +1,13 @@
+{
+  "name": "Leangsreng SREAN",
+  "title": "Machine Learning Engineer",
+  "tagline": "Speech AI & Khmer Language Technology",
+  "bio": "Computer Science graduate from Cambodia Academy of Digital Technology (CADT), specializing in Data Science. Currently studying Japanese IT pathway at American University of Phnom Penh (AUPP), hosted by NEXT MAKE co.ltd in Osaka. Former Research Intern at IDRI Lab (CADT) working on Khmer–English code-switching ASR, and Machine Learning Engineer Intern at Fintech Center of FSA building end-to-end Khmer ASR systems — including data pipelines, model training, and a full-stack ASR deployment portal. Bachelor's thesis on fine-tuning Whisper for Khmer speech recognition.",
+  "avatar": "/images/profile.jpg",
+  "socials": {
+    "github": "https://github.com/1morecupofhottea",
+    "linkedin": "https://www.linkedin.com/in/srengg/"
+  },
+  "email": "leangsreng.srean@gmail.com",
+  "resumeUrl": "/resume.pdf"
+}

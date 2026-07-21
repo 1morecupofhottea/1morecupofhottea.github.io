@@ -1,0 +1,40 @@
+---
+title: "Khmer–English Code-Switching ASR"
+slug: khmer-asr-codeswitching
+publishedAt: "2025-07-01"
+category: "ASR"
+tags: ["Wav2Vec2", "Whisper", "Code-Switching", "HuggingFace", "Research"]
+image: "/images/projects/khmer-codeswitching.png"
+description: "Research internship project at IDIR Lab, CADT: exploring ASR models for Khmer–English code-switched speech."
+---
+
+## Context
+
+Khmer speakers, especially in urban and professional settings, frequently switch between Khmer and English within a single sentence. This code-switching behavior challenges standard monolingual ASR systems, which are trained on one language at a time.
+
+This was my research focus during an internship at the IDIR Lab at CADT.
+
+## Research Questions
+
+1. How do wav2vec2 and Whisper perform out-of-the-box on code-switched Khmer–English speech?
+2. What fine-tuning strategies improve multilingual ASR on low-resource code-switched data?
+3. What are the key failure modes — mispronunciation, transliteration, language boundary errors?
+
+## Approach
+
+- Collected and annotated a small corpus of naturally occurring code-switched speech
+- Benchmarked Whisper (multilingual) and wav2vec2 (multilingual) in zero-shot settings
+- Explored targeted fine-tuning on the code-switched subset
+- Error analysis: categorized mistakes by language boundary, phoneme confusion, and out-of-vocabulary terms
+
+## Findings
+
+- Whisper's multilingual checkpoint handles English insertions into Khmer reasonably well; the main failures occur at language boundaries with transliterated words
+- Wav2Vec2 requires task-specific fine-tuning to reach comparable performance
+- Data scarcity is the primary bottleneck — synthetic augmentation via TTS for both languages shows promise
+
+## Stack
+
+- HuggingFace Transformers (Whisper, Wav2Vec2)
+- PyTorch
+- Python audio processing (librosa, soundfile)

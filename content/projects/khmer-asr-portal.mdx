@@ -1,0 +1,50 @@
+---
+title: "Khmer ASR Portal"
+slug: khmer-asr-portal
+publishedAt: "2026-06-01"
+category: "ASR"
+tags: ["Whisper", "FastAPI", "Vue.js", "PyTorch", "Khmer TTS", "Docker"]
+image: "/images/projects/khmer-asr-portal.png"
+featured: true
+description: "End-to-end audio corpus management and model deployment platform for Khmer speech recognition, built for the Fintech Center of FSA, Cambodia."
+---
+
+## Overview
+
+Khmer is a low-resource language with limited publicly available speech data. This project tackles that problem from both ends: a corpus collection portal to gather and label audio data, and a model deployment portal to serve fine-tuned Whisper models in production.
+
+## Audio Corpus Portal
+
+The corpus portal allows internal teams to upload, annotate, and quality-check Khmer speech recordings. Key features:
+
+- **Bulk audio upload** with waveform preview and playback
+- **Transcription workflow** with task assignment and review stages
+- **Khmer TTS integration** — synthetic audio generated via a Khmer TTS engine to supplement real recordings
+- **Data export** in formats compatible with HuggingFace Datasets and Kaldi
+
+The backend is FastAPI with PostgreSQL for metadata storage and file system storage for audio blobs. The frontend is built with Vue.js.
+
+## Model Deployment Portal
+
+A separate interface for ML engineers to manage trained Whisper model versions:
+
+- Upload and register new model checkpoints
+- Run batch inference jobs on uploaded audio files
+- View transcription outputs alongside ground-truth labels and WER metrics
+- A/B compare multiple model versions on the same test set
+
+## Training Pipeline
+
+Fine-tuning runs on Whisper small/medium checkpoints using the collected corpus plus TTS-augmented data:
+
+- Audio preprocessing: resampling to 16kHz, noise augmentation, speed perturbation
+- Tokenizer adapted for Khmer Unicode script
+- Training with HuggingFace `Seq2SeqTrainer`, logging to MLflow
+- Evaluation on a held-out native speaker test set
+
+## Stack
+
+- **Backend**: Python, FastAPI, SQLAlchemy, PostgreSQL
+- **Frontend**: Vue.js, Vite
+- **ML**: PyTorch, HuggingFace Transformers, Whisper
+- **Infra**: Docker, Linux

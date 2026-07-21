@@ -1,0 +1,58 @@
+---
+title: "Fine-tuning Whisper for Khmer: What I Learned"
+slug: fine-tuning-whisper-khmer
+publishedAt: "2026-05-10"
+tags: ["ASR", "Whisper", "Khmer", "Fine-tuning", "Low-resource"]
+excerpt: "Whisper is impressive out of the box — but Khmer is not one of its strong languages. Here's what actually moved the needle when fine-tuning for Khmer ASR."
+readingTime: "7 min read"
+---
+
+Whisper covers 99 languages. Khmer is one of them. But "covers" is doing a lot of work in that sentence.
+
+When I first ran Whisper on a Khmer speech test set, the word error rate was... bad. Whisper had clearly seen very little Khmer during its training, and it showed. Fine-tuning was the only path forward.
+
+Here's what I learned from months of fine-tuning experiments for my thesis.
+
+## The data problem comes first
+
+Before you think about model hyperparameters, think about data. Khmer has a complex script — subscript characters, stacked consonants, no spaces between words in many contexts. If your training transcriptions aren't clean, your model learns noise.
+
+I spent more time on data cleaning than on training. That was the right call.
+
+**Key data issues I hit:**
+
+- Transcriptions with inconsistent Unicode normalization (NFC vs. NFD can create duplicate characters that look identical but aren't)
+- Audio–text pairs from broadcast media where on-screen text doesn't match what was actually said
+- TTS-generated audio with unnatural prosody at sentence boundaries
+
+## TTS augmentation helps, but not uniformly
+
+I used Khmer TTS to generate synthetic training samples from text corpora. This is appealing because text corpora are easier to collect than transcribed speech.
+
+The results were mixed. TTS augmentation helped most with vocabulary coverage — it exposed the model to written Khmer vocabulary that doesn't appear in the small real-speech corpus. But it hurt slightly on naturalistic conversational speech, because TTS prosody is different from how people actually talk.
+
+**Lesson**: mix real and synthetic data, don't replace. I settled on roughly 70% real / 30% TTS and saw better generalization than either alone.
+
+## Tokenizer matters for Khmer
+
+Whisper's default multilingual tokenizer handles Khmer, but it tokenizes at the Unicode character level for many Khmer characters. This means the vocabulary for Khmer is large and the model sees rare tokens frequently.
+
+Adding a custom tokenizer with Khmer syllable-level subword units improved training convergence. It's more work upfront but worth it for a production system.
+
+## What actually moved WER
+
+Roughly in order of impact:
+
+1. **Cleaning transcription noise** — biggest win by far
+2. **Syllable-level tokenization** — meaningful improvement
+3. **Learning rate schedule** — cosine with warmup, small LR for Whisper (1e-5 range)
+4. **TTS augmentation** — modest but consistent improvement on vocabulary coverage
+5. **Speed perturbation** — small but cheap to add, helps with speaking rate variation
+
+What didn't help much: longer training beyond convergence, heavy audio augmentation (noise, reverb) on a corpus that was already reasonably clean.
+
+## The baseline gap is an opportunity
+
+Khmer ASR is still far behind where English ASR was ten years ago. That's frustrating — but it also means there's real headroom. Careful data curation and fine-tuning of strong multilingual models like Whisper can make a meaningful difference for Khmer speakers.
+
+If you're working on low-resource ASR for Southeast Asian languages, I'd love to compare notes.

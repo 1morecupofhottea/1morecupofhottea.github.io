@@ -1,0 +1,135 @@
+{
+  "Site": {
+    "title": "機械学習エンジニア",
+    "tagline": "音声AI & クメール言語技術",
+    "bio": "カンボジア非銀行金融庁（NBCA）に所属する機械学習エンジニア。音声データパイプライン、Whisperのファインチューニング、FastAPI + VueによるフルスタックASRデプロイメントポータルまで、クメール語ASRシステムをゼロから構築。CADTを2026年に卒業し、クメール語音声認識に関する論文を執筆。現在は日本のテック企業での次のキャリアに向けて準備中。"
+  },
+  "Nav": {
+    "about": "概要",
+    "skills": "スキル",
+    "projects": "プロジェクト",
+    "experience": "経歴",
+    "blog": "ブログ",
+    "contact": "お問い合わせ",
+    "resume": "履歴書"
+  },
+  "LangSwitch": {
+    "en": "EN",
+    "ja": "日本語"
+  },
+  "Hero": {
+    "greeting": "こんにちは、{name}です",
+    "subtitle": "クメール語の音声認識システムを構築しています — 音声データパイプライン、WhisperのファインチューニングからフルスタックASRポータルまで。低リソース言語にも優れた音声AIを。",
+    "viewProjects": "プロジェクトを見る",
+    "downloadResume": "履歴書をダウンロード",
+    "statYears": "経験年数",
+    "statProjects": "プロジェクト数",
+    "statTools": "習得ツール"
+  },
+  "AboutSection": {
+    "title": "概要",
+    "heading": "過小評価されている言語のための音声AI",
+    "bio2": "ASRモデルの学習や音声データセットの整理をしていないときは、このブログで音声技術と低リソースNLPについて書いています。",
+    "statYears": "経験年数",
+    "statProjects": "AIプロジェクト",
+    "statTools": "ツール・フレームワーク"
+  },
+  "SkillsSection": {
+    "title": "スキル",
+    "heading": "ツールと技術"
+  },
+  "ProjectsSection": {
+    "title": "プロジェクト",
+    "heading": "注目のプロジェクト",
+    "viewAll": "すべて見る →",
+    "viewAllMobile": "すべてのプロジェクト"
+  },
+  "ExperienceSection": {
+    "title": "経歴",
+    "heading": "キャリアタイムライン"
+  },
+  "ContactSection": {
+    "title": "お問い合わせ",
+    "heading": "一緒に仕事をしませんか",
+    "description": "音声AI、低リソース言語技術、または興味深いML問題に関するコラボレーションを歓迎します。ASR、NLP、または関連分野に取り組んでいる方は、お気軽にご連絡ください。",
+    "namePlaceholder": "お名前",
+    "emailPlaceholder": "your@email.com",
+    "messagePlaceholder": "プロジェクトや役割について教えてください...",
+    "nameRequired": "お名前を入力してください。",
+    "emailRequired": "メールアドレスを入力してください。",
+    "emailInvalid": "有効なメールアドレスを入力してください。",
+    "messageRequired": "メッセージを入力してください。",
+    "sending": "送信中...",
+    "sent": "送信完了！",
+    "sendMessage": "メッセージを送信",
+    "error": "エラーが発生しました — メールで直接ご連絡ください。",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter"
+  },
+  "Footer": {
+    "builtWith": "Next.js & Tailwind CSS で構築"
+  },
+  "ProjectCard": {
+    "github": "GitHub",
+    "liveDemo": "デモを見る",
+    "readMore": "続きを読む →"
+  },
+  "ProjectFilter": {
+    "all": "すべて"
+  },
+  "ProjectsPage": {
+    "label": "ポートフォリオ",
+    "title": "すべてのプロジェクト",
+    "description": "クメール語音声認識、音声データパイプライン、コンピュータビジョン — 研究から実運用までのMLプロジェクト。"
+  },
+  "ProjectDetail": {
+    "backToProjects": "プロジェクトに戻る",
+    "viewOnGitHub": "GitHubで見る",
+    "liveDemo": "デモを見る",
+    "nextProject": "次のプロジェクト"
+  },
+  "BlogPage": {
+    "label": "記事",
+    "title": "ブログ",
+    "description": "AIエンジニアリング、実運用LLM、そしてMLシステム構築の現実についてのノート。",
+    "readMore": "続きを読む →"
+  },
+  "BlogDetail": {
+    "backToBlog": "ブログに戻る"
+  },
+  "AboutPage": {
+    "label": "概要",
+    "focusParagraph": "私の専門は低リソース言語、特にクメール語の音声AIです。データ収集とアノテーション、TTSベースの拡張、モデルのファインチューニング、そして実運用でのモデルデプロイと評価のためのインフラ構築まで、パイプライン全体にわたって取り組んでいます。すべての言語に優れた音声技術が存在するべきだと信じています。",
+    "prepParagraph": "現在は大阪の日本企業make.co.ltdでの次のキャリアに向けて準備中で、日本のITプラクティスを学んでいます。仕事以外では、このブログで音声技術と低リソースNLPについて書いています。",
+    "downloadResume": "履歴書をダウンロード",
+    "getInTouch": "連絡する",
+    "connect": "つながる",
+    "technologies": "技術スタック",
+    "experience": "経歴",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter"
+  },
+  "ContactPage": {
+    "description": "お気軽にご連絡ください — フルタイムのポジション、コンサルティング、興味深いプロジェクトを歓迎します。"
+  },
+  "SectionLabel": {
+    "of": "/"
+  },
+  "SkillGacha": {
+    "openFab": "スキルガチャを開く",
+    "title": "スキルガチャ",
+    "close": "閉じる",
+    "pull": "回す",
+    "spinning": "回転中...",
+    "resultLabel": "あなたのスキルは..."
+  },
+  "Casino": {
+    "play": "プレイ",
+    "loading": "読込中...",
+    "introSkip": "クリックでスキップ",
+    "mute": "サウンドをミュート",
+    "unmute": "サウンドをオン"
+  }
+}
