@@ -30,8 +30,11 @@ interface ReelRevealProps {
 
 // Below this scroll intensity, a reel is considered "at rest" and settles
 // toward the real text rather than scrambling. Keeps a slow/idle scroll
-// from constantly re-shuffling already-settled text.
-const IDLE_THRESHOLD = 0.04;
+// from constantly re-shuffling already-settled text. Raised from an
+// earlier, much lower value that let almost any incidental scroll
+// (including a slow, deliberate read-scroll) register as "spinning" —
+// text should only actively churn on a clearly intentional, faster scroll.
+const IDLE_THRESHOLD = 0.15;
 
 const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789♠♣♥♦";
 
@@ -138,8 +141,12 @@ export function ReelReveal({
         // flicker rate and the settled→loose knockback are paced by
         // `effectiveInterval`, not every animation frame, so `speed` still
         // matters and the spin doesn't strobe at 60fps regardless of intensity.
+        // The `0.45` coefficient (was `0.7`) caps max churn speed at ~1.8x
+        // the base interval instead of ~3.3x — the original curve read as
+        // an aggressive flicker rather than a smooth, controlled spin even
+        // at full intensity.
         intervalCarry += dt;
-        const effectiveInterval = interval * (1 - intensity * 0.7);
+        const effectiveInterval = interval * (1 - intensity * 0.45);
         let flipped = false;
         while (intervalCarry >= effectiveInterval) {
           intervalCarry -= effectiveInterval;
@@ -149,7 +156,12 @@ export function ReelReveal({
             // A hard scroll knocks settled characters back into motion too
             // (a real spinning wheel doesn't stay half-settled), scaled so
             // gentle scrolling mostly leaves already-settled chars alone.
-            if (settleRef.current[i] >= 1 && Math.random() < intensity * 0.5) {
+            // Coefficient lowered from `0.5` to `0.22`: at full intensity
+            // the old value gave already-settled, readable characters a
+            // coin-flip chance *per tick* of being violently re-scrambled,
+            // which — combined with multiple ticks firing in one frame —
+            // is what made the effect read as glitchy rather than smooth.
+            if (settleRef.current[i] >= 1 && Math.random() < intensity * 0.22) {
               settleRef.current[i] = 0;
             }
           }

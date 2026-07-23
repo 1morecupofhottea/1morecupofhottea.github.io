@@ -17,6 +17,22 @@ const MUTE_STORAGE_KEY = "casino-muted";
 // feel: a fast trackpad/wheel fling lands around 3–5 px/ms.
 const MAX_SCROLL_SPEED = 4;
 
+// Touch-driven momentum scrolling reports far larger per-frame `scrollY`
+// deltas than a wheel/trackpad tick does for an equivalent, gentle swipe —
+// the same px/ms math that feels right for a "hard fling" on desktop was
+// being hit by nearly *every* ordinary mobile scroll gesture, pinning
+// intensity at (or near) 1 constantly and making every heading/label/tag
+// scramble at ~3x the base speed non-stop. Dividing a touch session's
+// measured speed by this factor before comparing against
+// `MAX_SCROLL_SPEED` normalizes a normal swipe back down to a moderate
+// intensity, while an intentional fast fling can still reach 1.
+const TOUCH_SCROLL_SPEED_DIVISOR = 3.5;
+
+function detectCoarsePointer(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(pointer: coarse)").matches;
+}
+
 interface CasinoContextValue {
   playKey: number;
   triggerPlay: () => void;
@@ -88,6 +104,10 @@ export function CasinoProvider({ children }: { children: React.ReactNode }) {
     lastScrollYRef.current = window.scrollY;
     lastScrollTRef.current = performance.now();
 
+    // Detected once per mount, not per scroll event — a session doesn't
+    // switch input types mid-visit, so this doesn't need to be reactive.
+    const isCoarsePointer = detectCoarsePointer();
+
     let decayFrame: number;
 
     const onScroll = () => {
@@ -95,7 +115,10 @@ export function CasinoProvider({ children }: { children: React.ReactNode }) {
       const t = performance.now();
       const dt = Math.max(t - lastScrollTRef.current, 1);
       const dy = Math.abs(y - lastScrollYRef.current);
-      const speed = dy / dt; // px/ms
+      const rawSpeed = dy / dt; // px/ms
+      const speed = isCoarsePointer
+        ? rawSpeed / TOUCH_SCROLL_SPEED_DIVISOR
+        : rawSpeed;
 
       scrollIntensityRef.current = Math.max(
         scrollIntensityRef.current,
