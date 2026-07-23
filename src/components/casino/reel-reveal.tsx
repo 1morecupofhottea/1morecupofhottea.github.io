@@ -135,34 +135,28 @@ export function ReelReveal({
       setActive(spinning);
 
       if (spinning) {
-        // The harder/faster the scroll, the more often characters churn and
-        // the faster the reel "spins" — this is the direct scroll → motion
-        // coupling ("the more you scroll, the more text moves"). Both the
-        // flicker rate and the settled→loose knockback are paced by
-        // `effectiveInterval`, not every animation frame, so `speed` still
-        // matters and the spin doesn't strobe at 60fps regardless of intensity.
-        // The `0.45` coefficient (was `0.7`) caps max churn speed at ~1.8x
-        // the base interval instead of ~3.3x — the original curve read as
-        // an aggressive flicker rather than a smooth, controlled spin even
-        // at full intensity.
+        // Scramble-in churn while text is revealing on scroll-into-view —
+        // the "slot reel" moment. Characters now settle (left-to-right,
+        // same bias as the idle branch below) *while* spinning too, just
+        // with a flashier, faster churn on the way there — instead of the
+        // previous design where any character not yet settled would churn
+        // in scrambled limbo for as long as scroll intensity stayed above
+        // threshold, only resolving once the user paused/slowed down. On a
+        // long continuous scroll (e.g. scrolling straight through several
+        // cards), that meant text could stay unreadable-scrambled for the
+        // entire scroll gesture — which is what actually read as
+        // "aggressive," far more than the churn speed itself.
         intervalCarry += dt;
         const effectiveInterval = interval * (1 - intensity * 0.45);
         let flipped = false;
         while (intervalCarry >= effectiveInterval) {
           intervalCarry -= effectiveInterval;
-          flipped = true;
           for (let i = 0; i < settleRef.current.length; i++) {
-            if (chars[i] === " ") continue;
-            // A hard scroll knocks settled characters back into motion too
-            // (a real spinning wheel doesn't stay half-settled), scaled so
-            // gentle scrolling mostly leaves already-settled chars alone.
-            // Coefficient lowered from `0.5` to `0.22`: at full intensity
-            // the old value gave already-settled, readable characters a
-            // coin-flip chance *per tick* of being violently re-scrambled,
-            // which — combined with multiple ticks firing in one frame —
-            // is what made the effect read as glitchy rather than smooth.
-            if (settleRef.current[i] >= 1 && Math.random() < intensity * 0.22) {
-              settleRef.current[i] = 0;
+            if (chars[i] === " " || settleRef.current[i] >= 1) continue;
+            flipped = true;
+            const positionBonus = (1 - i / chars.length) * 0.15;
+            if (Math.random() < settleChance + positionBonus) {
+              settleRef.current[i] = 1;
             }
           }
         }
@@ -173,6 +167,20 @@ export function ReelReveal({
         if (flipped) {
           render();
           playReelTick(intensity);
+        }
+
+        // Everything settled while still "spinning" (a fast scroll can
+        // outrun the settle chances above) — lock in and stop the loop
+        // immediately rather than waiting for intensity to first decay
+        // below IDLE_THRESHOLD, same end state the idle branch reaches.
+        const stillUnsettled = settleRef.current.some(
+          (v, i) => chars[i] !== " " && v < 1
+        );
+        if (!stillUnsettled) {
+          setDisplayText(text);
+          if (once) lockedRef.current = true;
+          setActive(false);
+          return;
         }
       } else {
         // At rest (or slowing down): settle left-to-right toward the real
