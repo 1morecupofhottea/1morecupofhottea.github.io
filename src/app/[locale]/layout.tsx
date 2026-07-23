@@ -6,10 +6,8 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { CustomCursor } from "@/components/shared/custom-cursor";
 import { CasinoProvider } from "@/components/casino/casino-provider";
-import { CasinoIntro } from "@/components/casino/casino-intro";
-import { InitialLoading } from "@/components/casino/initial-loading";
 import { ResumeLoadingProvider } from "@/components/casino/resume-loading-provider";
-import { ResumeLoadingOverlay } from "@/components/casino/resume-loading-overlay";
+import { DeferredOverlays } from "@/components/casino/deferred-overlays";
 import siteData from "../../../content/site.json";
 
 export async function generateMetadata({
@@ -60,9 +58,7 @@ export default async function LocaleLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Footer locale={locale} />
-          <CasinoIntro />
-          <InitialLoading />
-          <ResumeLoadingOverlay />
+          <DeferredOverlays />
         </ResumeLoadingProvider>
       </CasinoProvider>
     </NextIntlClientProvider>
