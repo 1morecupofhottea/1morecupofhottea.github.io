@@ -36,6 +36,14 @@ interface ReelRevealProps {
 // text should only actively churn on a clearly intentional, faster scroll.
 const IDLE_THRESHOLD = 0.15;
 
+// How many settle-roll ticks/frames pass between visual flicker updates for
+// still-unsettled characters. Re-randomizing a character's displayed glyph
+// on every tick (the settle-roll cadence — ~22–60 times/sec depending on
+// branch/speed) is a harsh strobe regardless of how many characters are
+// unsettled or for how long; slowing the *visible* flicker down to roughly
+// a third of that rate reads as a smooth shimmer instead.
+const FLICKER_TICKS_PER_RENDER = 3;
+
 const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789♠♣♥♦";
 
 export function ReelReveal({
@@ -65,6 +73,11 @@ export function ReelReveal({
   // (settled on the real character). Persists across frames in a ref so the
   // per-frame loop can read/mutate it without triggering re-renders itself.
   const settleRef = useRef<number[]>([]);
+  // Counts render-loop iterations so the visual flicker (re-randomizing
+  // still-unsettled characters' displayed glyph) can update at a slower,
+  // gentler cadence than the settle-roll check itself — see
+  // FLICKER_TICKS_PER_RENDER below.
+  const flickerTickRef = useRef(0);
   // Whether this instance is currently registered as "active" with the
   // casino provider (see registerReelActive/unregisterReelActive).
   const activeRef = useRef(false);
@@ -136,36 +149,41 @@ export function ReelReveal({
 
       if (spinning) {
         // Scramble-in churn while text is revealing on scroll-into-view —
-        // the "slot reel" moment. Characters now settle (left-to-right,
-        // same bias as the idle branch below) *while* spinning too, just
-        // with a flashier, faster churn on the way there — instead of the
-        // previous design where any character not yet settled would churn
-        // in scrambled limbo for as long as scroll intensity stayed above
-        // threshold, only resolving once the user paused/slowed down. On a
-        // long continuous scroll (e.g. scrolling straight through several
-        // cards), that meant text could stay unreadable-scrambled for the
-        // entire scroll gesture — which is what actually read as
-        // "aggressive," far more than the churn speed itself.
+        // the "slot reel" moment. Characters settle (left-to-right, same
+        // bias as the idle branch below) while spinning too, so nothing
+        // sits in scrambled limbo for the length of a scroll gesture.
+        //
+        // The *visual* flicker (what glyph an unsettled character shows)
+        // is deliberately updated at a slower cadence than the settle-roll
+        // below (`FLICKER_TICKS_PER_RENDER`): re-randomizing every
+        // unsettled character to a brand-new glyph from a 41-character set
+        // on every ~24–45ms tick is a ~25–40Hz strobe — visually harsh
+        // regardless of how many characters are unsettled or for how long,
+        // which is what was still reading as "aggressive" even after
+        // fixing the settle-limbo and knockback issues (those controlled
+        // *how much* text moves and *for how long*, not how harsh the
+        // per-character flicker looks while it's moving).
         intervalCarry += dt;
         const effectiveInterval = interval * (1 - intensity * 0.45);
-        let flipped = false;
+        let settleChanged = false;
         while (intervalCarry >= effectiveInterval) {
           intervalCarry -= effectiveInterval;
+          flickerTickRef.current += 1;
           for (let i = 0; i < settleRef.current.length; i++) {
             if (chars[i] === " " || settleRef.current[i] >= 1) continue;
-            flipped = true;
             const positionBonus = (1 - i / chars.length) * 0.15;
             if (Math.random() < settleChance + positionBonus) {
               settleRef.current[i] = 1;
+              settleChanged = true;
             }
           }
         }
-        // Tick fires in the same branch, on the same `flipped` condition,
-        // as the visual render — so the sound is perfectly synced to every
-        // moment the text actually changes on screen, not on an independent
-        // timer that could drift out of phase with what's visible.
-        if (flipped) {
+        const shouldFlicker =
+          flickerTickRef.current % FLICKER_TICKS_PER_RENDER === 0;
+        if (settleChanged || shouldFlicker) {
           render();
+        }
+        if (settleChanged) {
           playReelTick(intensity);
         }
 
@@ -199,6 +217,7 @@ export function ReelReveal({
           return; // stop the loop — fully at rest
         }
 
+        let hasSettledThisFrame = false;
         while (intervalCarry >= interval) {
           intervalCarry -= interval;
           let settledThisTick = false;
@@ -214,9 +233,26 @@ export function ReelReveal({
           // actually changes, so the sound stays perfectly synced to
           // visible motion all the way through the final settle, not just
           // during the aggressive spin phase.
-          if (settledThisTick) playReelTick(intensity);
+          if (settledThisTick) {
+            playReelTick(intensity);
+            hasSettledThisFrame = true;
+          }
         }
-        render();
+        // Gated the same way as the spinning branch: without this, any
+        // still-unsettled character gets re-randomized to a new glyph on
+        // every animation frame (~60Hz) regardless of how often the
+        // settle-roll above actually fires, which is an even harsher
+        // strobe than the spinning branch's tick-paced one. A character
+        // that just settled this frame always renders immediately though
+        // (`hasSettledThisFrame`) — gating that too would show stale
+        // scrambled glyphs for settled characters until the next allowed
+        // flicker frame.
+        flickerTickRef.current += 1;
+        const shouldFlicker =
+          flickerTickRef.current % FLICKER_TICKS_PER_RENDER === 0;
+        if (hasSettledThisFrame || shouldFlicker) {
+          render();
+        }
       }
 
       rafId = requestAnimationFrame(loop);
@@ -243,8 +279,9 @@ export function ReelReveal({
 
   return (
     // @ts-expect-error — dynamic tag with forwarded ref
-    <Tag ref={ref} className={className} style={style} aria-label={text}>
+    <Tag ref={ref} className={className} style={style}>
       <span aria-hidden="true">{displayText}</span>
+      <span className="sr-only">{text}</span>
     </Tag>
   );
 }
