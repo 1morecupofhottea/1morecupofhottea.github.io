@@ -10,23 +10,9 @@ import {
   useSyncExternalStore,
 } from "react";
 import { playLeverSound, playReelSettleTick } from "@/lib/casino-sounds";
+import { computeScrollSpeed, applyScrollSpeed, decayIntensity } from "@/lib/scroll-intensity";
 
 const MUTE_STORAGE_KEY = "casino-muted";
-
-// Scroll speed (px/ms) at/above which intensity maxes out at 1. Tuned by
-// feel: a fast trackpad/wheel fling lands around 3–5 px/ms.
-const MAX_SCROLL_SPEED = 4;
-
-// Touch-driven momentum scrolling reports far larger per-frame `scrollY`
-// deltas than a wheel/trackpad tick does for an equivalent, gentle swipe —
-// the same px/ms math that feels right for a "hard fling" on desktop was
-// being hit by nearly *every* ordinary mobile scroll gesture, pinning
-// intensity at (or near) 1 constantly and making every heading/label/tag
-// scramble at ~3x the base speed non-stop. Dividing a touch session's
-// measured speed by this factor before comparing against
-// `MAX_SCROLL_SPEED` normalizes a normal swipe back down to a moderate
-// intensity, while an intentional fast fling can still reach 1.
-const TOUCH_SCROLL_SPEED_DIVISOR = 3.5;
 
 function detectCoarsePointer(): boolean {
   if (typeof window === "undefined") return false;
@@ -114,16 +100,10 @@ export function CasinoProvider({ children }: { children: React.ReactNode }) {
       const y = window.scrollY;
       const t = performance.now();
       const dt = Math.max(t - lastScrollTRef.current, 1);
-      const dy = Math.abs(y - lastScrollYRef.current);
-      const rawSpeed = dy / dt; // px/ms
-      const speed = isCoarsePointer
-        ? rawSpeed / TOUCH_SCROLL_SPEED_DIVISOR
-        : rawSpeed;
+      const dy = y - lastScrollYRef.current;
+      const speed = computeScrollSpeed(dy, dt, isCoarsePointer);
 
-      scrollIntensityRef.current = Math.max(
-        scrollIntensityRef.current,
-        Math.min(speed / MAX_SCROLL_SPEED, 1)
-      );
+      scrollIntensityRef.current = applyScrollSpeed(scrollIntensityRef.current, speed);
 
       lastScrollYRef.current = y;
       lastScrollTRef.current = t;
@@ -132,8 +112,7 @@ export function CasinoProvider({ children }: { children: React.ReactNode }) {
     // Continuously decay intensity back toward 0 so it reflects *recent*
     // scroll speed rather than staying pinned at its peak forever.
     const decay = () => {
-      scrollIntensityRef.current *= 0.92;
-      if (scrollIntensityRef.current < 0.001) scrollIntensityRef.current = 0;
+      scrollIntensityRef.current = decayIntensity(scrollIntensityRef.current);
       decayFrame = requestAnimationFrame(decay);
     };
 
