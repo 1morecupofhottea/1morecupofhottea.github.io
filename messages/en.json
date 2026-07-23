@@ -10,6 +10,7 @@
     "projects": "Projects",
     "experience": "Experience",
     "blog": "Blog",
+    "craft": "Craft",
     "contact": "Contact",
     "resume": "Resume"
   },
@@ -113,6 +114,25 @@
   },
   "ContactPage": {
     "description": "Get in touch — open to full-time roles, consulting, and interesting projects."
+  },
+  "CraftPage": {
+    "label": "Craft",
+    "title": "The Engineering Behind This Portfolio",
+    "intro": "A portfolio site is usually just a page that lists your work. I wanted this one to also demonstrate how I work — so almost everything here, down to how the text moves when you scroll, was built and tuned on purpose rather than dropped in from a template. This page is where I show that work directly.",
+    "reelTitle": "A slot reel you scroll",
+    "reelBody": "Headings and labels don't just fade in — they scramble into place like a slot-machine reel settling, and how aggressively they spin is tied to how fast you're actually scrolling. Under the hood that means tracking scroll velocity in pixels per millisecond, decaying it smoothly so it reflects recent motion instead of a stale peak, and normalizing touch-scroll momentum separately from mouse and trackpad input so a normal swipe on mobile doesn't read as a hard fling. None of it comes at the cost of accessibility: it respects prefers-reduced-motion, and screen readers always get the real text immediately from hidden, always-current text content — never the scrambled glyphs.",
+    "soundTitle": "Sound with no audio files",
+    "soundBody": "Every sound effect — the lever pull, the reel-settle ticks — is synthesized live with the Web Audio API: oscillators and gain envelopes, not MP3s. Volume and pitch scale with how fast you're scrolling and how much text is actually moving on screen at once, so a hard scroll past a single small label stays quiet instead of producing a jarring hit for barely any motion.",
+    "cursorTitle": "A cursor that feels physical",
+    "cursorBody": "On a mouse or trackpad, the system cursor is replaced with a precise dot and a spring-lagged ring that tightens and glows over interactive elements — spring physics tuned with the same stiffness and damping values used elsewhere on the site, not a generic follow-the-mouse effect. It only mounts on pointer-fine devices, never touchscreens, and skips the spring animation entirely under reduced motion.",
+    "i18nTitle": "Two languages, not an afterthought",
+    "i18nBody": "The site is bilingual — English and Japanese — from the routing layer up: every route is always locale-prefixed, and every piece of UI copy and content is fully translated rather than spot-translated. I built it this way because I'm preparing for a move to Japan, and I wanted the site itself to actually work in Japanese, not just offer a language toggle that swaps a few words.",
+    "contentTitle": "No CMS, on purpose",
+    "contentBody": "Projects and blog posts live as version-controlled Markdown files with YAML frontmatter, parsed at build time. There's no database, no external CMS to pay for, configure, or watch go down — editing a project means editing a file and opening a pull request, the same workflow as any other change to the codebase.",
+    "qualityTitle": "Held to the same standard as production code",
+    "qualityBody": "The parts of this site with real logic — how scroll speed becomes animation intensity, how content files get parsed into pages — are covered by automated unit tests, and a CI pipeline runs linting, type-checking, and the full test suite on every change before it can reach the live site. A portfolio doesn't strictly need this. I wanted to build it anyway.",
+    "closing": "This page covers the highlights — the rest is in the source.",
+    "viewSource": "View the source on GitHub"
   },
   "SectionLabel": {
     "of": "/"

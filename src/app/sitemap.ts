@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { url: `${BASE_URL}${prefix}/projects`, lastModified: new Date() },
       { url: `${BASE_URL}${prefix}/blog`, lastModified: new Date() },
       { url: `${BASE_URL}${prefix}/about`, lastModified: new Date() },
+      { url: `${BASE_URL}${prefix}/craft`, lastModified: new Date() },
       { url: `${BASE_URL}${prefix}/contact`, lastModified: new Date() },
       ...projects,
       ...posts
