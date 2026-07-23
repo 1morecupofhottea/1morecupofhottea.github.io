@@ -98,10 +98,20 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    /* Guards against a brief "desktop mode" flash on mobile first paint:
+       without this, any element that is momentarily wider than the
+       viewport (e.g. during a font-swap reflow, or before a mobile
+       browser's dynamic URL bar collapses and it recalculates the layout
+       viewport) can widen `documentElement.scrollWidth` past the real
+       screen width. That wider computed width is enough for `md:`/`lg:`
+       breakpoints to briefly match on a phone, snapping back once the
+       viewport is recalculated (typically on the first scroll/resize). */
+    overflow-x: hidden;
   }
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 }
 
