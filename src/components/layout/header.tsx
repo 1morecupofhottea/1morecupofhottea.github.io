@@ -39,7 +39,10 @@ export function Header() {
       return pathname === href || pathname.startsWith(`${href}/`);
     }
     // Hash routes are only active while on the homepage, driven by scroll-spy.
-    if (!/^\/(en|ja)\/?$/.test(pathname)) return false;
+    // `pathname` from `@/lib/navigation` is locale-stripped (next-intl's
+    // `usePathname` always omits the locale prefix, regardless of
+    // `localePrefix` mode), so the homepage is always "/" here.
+    if (pathname !== "/") return false;
     const id = href.split("#")[1];
     return id === activeSectionId;
   };

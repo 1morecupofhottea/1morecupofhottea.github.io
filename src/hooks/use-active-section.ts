@@ -22,7 +22,10 @@ import { usePathname } from "@/lib/navigation";
 export function useActiveSection(sectionIds: string[], offset = 120) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const pathname = usePathname();
-  const hasSections = /^\/(en|ja)\/?$/.test(pathname);
+  // `pathname` from `@/lib/navigation` is locale-stripped (next-intl's
+  // `usePathname` always omits the locale prefix, regardless of
+  // `localePrefix` mode), so the homepage is always "/" here.
+  const hasSections = pathname === "/";
 
   useEffect(() => {
     if (!hasSections) return;
