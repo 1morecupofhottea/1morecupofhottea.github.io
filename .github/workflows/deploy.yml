@@ -1,3 +1,7 @@
+# Requires repo Settings > Pages > Source = "GitHub Actions".
+# If Source is "Deploy from a branch" instead, GitHub also runs its own
+# built-in "pages build and deployment" job (Jekyll) which fails on this
+# Next.js output.
 name: Deploy to GitHub Pages
 
 on:
