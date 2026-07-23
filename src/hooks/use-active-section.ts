@@ -22,7 +22,7 @@ import { usePathname } from "@/lib/navigation";
 export function useActiveSection(sectionIds: string[], offset = 120) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const pathname = usePathname();
-  const hasSections = pathname === "/";
+  const hasSections = /^\/(en|ja)\/?$/.test(pathname);
 
   useEffect(() => {
     if (!hasSections) return;

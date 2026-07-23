@@ -39,7 +39,7 @@ export function Header() {
       return pathname === href || pathname.startsWith(`${href}/`);
     }
     // Hash routes are only active while on the homepage, driven by scroll-spy.
-    if (pathname !== "/") return false;
+    if (!/^\/(en|ja)\/?$/.test(pathname)) return false;
     const id = href.split("#")[1];
     return id === activeSectionId;
   };
