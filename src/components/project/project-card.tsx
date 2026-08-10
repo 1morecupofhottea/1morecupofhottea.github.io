@@ -93,7 +93,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
     >
       <Card
         className={cn(
-          "card-shine group relative overflow-hidden border-border bg-white/70 backdrop-blur-sm h-full flex flex-col p-0 transition-shadow duration-200",
+          "card-shine group relative overflow-hidden border-border bg-white h-full flex flex-col p-0 transition-shadow duration-200",
           prefersReducedMotion &&
             "hover:shadow-[0_10px_15px_-3px_rgba(0,0,0,0.08),0_4px_6px_-2px_rgba(0,0,0,0.04)]"
         )}

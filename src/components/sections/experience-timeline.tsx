@@ -90,7 +90,7 @@ function TimelineCard({ item, playKey }: TimelineCardProps) {
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       whileHover={{ y: -4 }}
       className={cn(
-        "card-shine group relative overflow-hidden rounded-xl border border-border bg-white/70 backdrop-blur-sm p-6 transition-shadow duration-200",
+        "card-shine group relative overflow-hidden rounded-xl border border-border bg-white p-6 transition-shadow duration-200",
         prefersReducedMotion && "shadow-sm hover:shadow-md"
       )}
     >
