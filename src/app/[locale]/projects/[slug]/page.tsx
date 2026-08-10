@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: Props) {
     <div className="pt-24 px-6 md:px-8 pb-24">
       <div className="max-w-[72rem] mx-auto">
         <Link
-          href="/projects"
+          href="/#projects"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
         >
           <ArrowLeft size={14} />

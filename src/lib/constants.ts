@@ -17,9 +17,6 @@ export function getExperienceItems(locale: string) {
 export const NAV_LINKS = [
   { href: "/#about", label: "about" },
   { href: "/#skills", label: "skills" },
-  { href: "/#projects", label: "projects" },
   { href: "/#experience", label: "experience" },
-  { href: "/blog", label: "blog" },
-  { href: "/craft", label: "craft" },
   { href: "/#contact", label: "contact" },
 ];

@@ -1,7 +1,7 @@
 [
   {
     "title": "Speech & ASR",
-    "skills": ["Whisper", "Wav2Vec2", "Kaldi", "PyAnnote", "Khmer TTS", "ONNX"]
+    "skills": ["Whisper", "Wav2Vec2", "Khmer TTS"]
   },
   {
     "title": "Deep Learning & ML",
@@ -13,6 +13,6 @@
   },
   {
     "title": "Tools & Frontend",
-    "skills": ["Vue.js", "Next.js", "Git", "MLflow", "Label Studio", "Jupyter"]
+    "skills": ["Vue.js", "Next.js", "Git", "Jupyter"]
   }
 ]

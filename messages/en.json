@@ -1,16 +1,14 @@
 {
   "Site": {
     "title": "Machine Learning Engineer",
-    "tagline": "Speech AI & Khmer Language Technology",
-    "bio": "Machine Learning Engineer at the Non-Bank Financial Authority of Cambodia, building Khmer ASR systems from the ground up — audio data pipelines, Whisper fine-tuning, and a full-stack deployment portal (FastAPI + Vue). CADT graduate 2026 with a thesis on Khmer speech recognition. Currently preparing for my next chapter at a Japanese tech company."
+    "tagline": "Building AI Systems & Exploring New Technologies",
+    "bio": "Machine Learning Engineer with experience building end-to-end AI systems — from data pipelines and model training to full-stack deployment. CADT graduate 2026 specializing in Data Science. Currently studying Japanese IT pathway, eager to explore new AI technologies and work on diverse machine learning projects."
   },
   "Nav": {
     "about": "About",
     "skills": "Skills",
     "projects": "Projects",
     "experience": "Experience",
-    "blog": "Blog",
-    "craft": "Craft",
     "contact": "Contact",
     "resume": "Resume"
   },
@@ -20,7 +18,7 @@
   },
   "Hero": {
     "greeting": "Hi, I'm {name}",
-    "subtitle": "I build speech recognition systems for Khmer — from audio data pipelines and Whisper fine-tuning to full-stack ASR portals. Low-resource languages deserve great speech AI.",
+    "subtitle": "I build AI systems and love exploring new technologies. From machine learning models to full-stack deployments, I'm always excited to work on diverse projects and learn emerging tools in the AI field.",
     "viewProjects": "View Projects",
     "downloadResume": "Download Resume",
     "statYears": "Years experience",
@@ -29,8 +27,7 @@
   },
   "AboutSection": {
     "title": "About",
-    "heading": "Building speech AI for underrepresented languages",
-    "bio2": "When I'm not training ASR models or wrangling audio datasets, I write about speech technology and low-resource NLP on this blog.",
+    "heading": "Exploring AI technologies and building real-world systems",
     "statYears": "Years experience",
     "statProjects": "AI projects shipped",
     "statTools": "Tools & frameworks"
@@ -52,7 +49,7 @@
   "ContactSection": {
     "title": "Contact",
     "heading": "Let's work together",
-    "description": "Open to collaborations on speech AI, low-resource language technology, or interesting ML problems. Whether you're working on ASR, NLP, or something adjacent — feel free to reach out.",
+    "description": "Open to collaborations on AI projects, machine learning systems, and exploring new technologies. Whether it's computer vision, NLP, or any interesting ML challenge — feel free to reach out.",
     "namePlaceholder": "Your name",
     "emailPlaceholder": "your@email.com",
     "messagePlaceholder": "Tell me about your project or role...",
@@ -82,7 +79,7 @@
   "ProjectsPage": {
     "label": "Portfolio",
     "title": "All Projects",
-    "description": "Khmer speech recognition, audio data pipelines, computer vision — ML projects from research to production."
+    "description": "Machine learning systems, data pipelines, and AI applications — from research to production deployment."
   },
   "ProjectDetail": {
     "backToProjects": "Back to projects",
@@ -93,7 +90,7 @@
   "BlogPage": {
     "label": "Writing",
     "title": "Blog",
-    "description": "Notes on AI engineering, production LLMs, and the messy reality of building ML systems.",
+    "description": "Thoughts on AI engineering, machine learning systems, and exploring new technologies.",
     "readMore": "Read more →"
   },
   "BlogDetail": {
@@ -101,8 +98,8 @@
   },
   "AboutPage": {
     "label": "About",
-    "focusParagraph": "My focus is speech AI for low-resource languages — specifically Khmer. I work across the full pipeline: data collection and annotation, TTS-based augmentation, model fine-tuning, and building the infrastructure to deploy and evaluate models in production. I believe great speech technology should exist for every language, not just the well-resourced ones.",
-    "prepParagraph": "Currently preparing for my next chapter at make.co.ltd, a Japanese IT company in Osaka, where I'll be studying Japanese IT practices. Outside of work I write about speech technology and low-resource NLP on this blog.",
+    "focusParagraph": "I work on machine learning systems across the full stack — from data pipelines and model training to deployment infrastructure. My experience includes building end-to-end AI applications with PyTorch, FastAPI, and modern ML tools. I'm always eager to explore new technologies and tackle diverse AI challenges.",
+    "prepParagraph": "Currently studying Japanese IT pathway while preparing for my next chapter in tech. I'm excited about the evolving AI landscape and look forward to working on innovative projects with new teams.",
     "downloadResume": "Download Resume",
     "getInTouch": "Get in touch",
     "connect": "Connect",

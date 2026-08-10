@@ -34,7 +34,10 @@ interface ReelRevealProps {
 // earlier, much lower value that let almost any incidental scroll
 // (including a slow, deliberate read-scroll) register as "spinning" —
 // text should only actively churn on a clearly intentional, faster scroll.
-const IDLE_THRESHOLD = 0.15;
+// Raised again — even a moderate scroll was still crossing the old
+// threshold often enough that the rolling text felt too fast/twitchy
+// during normal reading-pace scrolling.
+const IDLE_THRESHOLD = 0.28;
 
 // How many settle-roll ticks/frames pass between visual flicker updates for
 // still-unsettled characters. Re-randomizing a character's displayed glyph
@@ -164,7 +167,11 @@ export function ReelReveal({
         // *how much* text moves and *for how long*, not how harsh the
         // per-character flicker looks while it's moving).
         intervalCarry += dt;
-        const effectiveInterval = interval * (1 - intensity * 0.45);
+        // Ticks speed up with intensity (harder scroll = faster-feeling
+        // scramble), but capped at a gentler multiplier than before — the
+        // full 45% speed-up at max intensity made the fastest scrambling
+        // feel too fast rather than just "energetic".
+        const effectiveInterval = interval * (1 - intensity * 0.25);
         let settleChanged = false;
         while (intervalCarry >= effectiveInterval) {
           intervalCarry -= effectiveInterval;

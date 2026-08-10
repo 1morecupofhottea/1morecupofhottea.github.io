@@ -190,7 +190,7 @@ export function ExperienceTimeline() {
 
   return (
     <SectionWrapper id="experience">
-      <SectionLabel number="04" total="05" title={t("title")} />
+      <SectionLabel number="03" total="04" title={t("title")} />
       <ReelReveal
         text={t("heading")}
         as="h2"

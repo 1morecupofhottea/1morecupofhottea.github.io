@@ -15,7 +15,7 @@ import { useActiveSection } from "@/hooks/use-active-section";
 
 // Section ids present on the homepage, in document order — used to drive
 // the scroll-spy underline on the nav links that point to "/#<id>".
-const SECTION_IDS = ["about", "skills", "projects", "experience", "contact"];
+const SECTION_IDS = ["about", "skills", "experience", "contact"];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);

@@ -13,7 +13,7 @@ export function AboutSection() {
 
   return (
     <SectionWrapper id="about" className="bg-muted/30">
-      <SectionLabel number="01" total="05" title={t("title")} />
+      <SectionLabel number="01" total="04" title={t("title")} />
       <div className="max-w-3xl">
         <div
           className="relative overflow-hidden mb-6"
@@ -31,11 +31,8 @@ export function AboutSection() {
             className="absolute top-0 left-0 w-full font-semibold block"
           />
         </div>
-        <p className="text-muted-foreground leading-relaxed mb-4">
-          {site("bio")}
-        </p>
         <p className="text-muted-foreground leading-relaxed">
-          {t("bio2")}
+          {site("bio")}
         </p>
       </div>
     </SectionWrapper>

@@ -9,8 +9,11 @@
  */
 
 /** Scroll speed (px/ms) at/above which intensity maxes out at 1. Tuned by
- * feel: a fast trackpad/wheel fling lands around 3–5 px/ms. */
-export const MAX_SCROLL_SPEED = 4;
+ * feel: a fast trackpad/wheel fling lands around 3–5 px/ms. Raised from an
+ * earlier, lower value that let an ordinary (non-fling) scroll reach
+ * intensity 1, making the reel-reveal text scramble read as too fast for
+ * everyday scrolling — now only a genuinely hard fling maxes it out. */
+export const MAX_SCROLL_SPEED = 6;
 
 /**
  * Touch-driven momentum scrolling reports far larger per-frame `scrollY`

@@ -1,7 +1,7 @@
 [
   {
     "title": "音声・ASR",
-    "skills": ["Whisper", "Wav2Vec2", "Kaldi", "PyAnnote", "Khmer TTS", "ONNX"]
+    "skills": ["Whisper", "Wav2Vec2", "Khmer TTS"]
   },
   {
     "title": "深層学習・ML",
@@ -13,6 +13,6 @@
   },
   {
     "title": "ツール・フロントエンド",
-    "skills": ["Vue.js", "Next.js", "Git", "MLflow", "Label Studio", "Jupyter"]
+    "skills": ["Vue.js", "Next.js", "Git", "Jupyter"]
   }
 ]

@@ -27,7 +27,7 @@ export function SkillsSection() {
 
   return (
     <SectionWrapper id="skills">
-      <SectionLabel number="02" total="05" title={t("title")} />
+      <SectionLabel number="02" total="04" title={t("title")} />
       <ReelReveal
         text={t("heading")}
         as="h2"

@@ -68,7 +68,7 @@ export function ContactSection() {
 
   return (
     <SectionWrapper id="contact" className="bg-muted/30">
-      <SectionLabel number="05" total="05" title={t("title")} />
+      <SectionLabel number="04" total="04" title={t("title")} />
       <div className="grid md:grid-cols-2 gap-16 items-start">
         <div>
           <h2 className="font-semibold mb-4" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}>
